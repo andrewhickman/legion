@@ -21,6 +21,7 @@ use crate::index::SetIndex;
 #[cfg(feature = "par-iter")]
 use crate::iterator::{FissileEnumerate, FissileIterator};
 use crate::storage::ArchetypeData;
+use crate::storage::ChunkId;
 use crate::storage::Component;
 use crate::storage::ComponentStorage;
 use crate::storage::ComponentTypeId;
@@ -507,6 +508,11 @@ impl<'a, V: for<'b> View<'b>> Chunk<'a, V> {
             set_index,
             view: PhantomData,
         }
+    }
+
+    /// Get the unique id of the chunk.
+    pub fn id(&self) -> ChunkId {
+        self.components.id()
     }
 
     /// Get a slice of all entities contained within the chunk.
